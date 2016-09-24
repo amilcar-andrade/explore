@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/padding_normal"
+    android:paddingEnd="@dimen/padding_normal"
+    android:paddingBottom="@dimen/padding_normal"
+    android:orientation="vertical">
+
+    <a2ndrade.explore.ui.widget.CircularImageView
+        android:id="@+id/developer_avatar"
+        android:layout_width="@dimen/avatar_bounds"
+        android:layout_height="@dimen/avatar_bounds"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="@dimen/avatar_margin"
+        android:layout_marginStart="@dimen/avatar_margin"
+        android:padding="@dimen/avatar_padding"
+        android:src="@drawable/avatar_placeholder" />
+
+    <TextView
+        android:id="@+id/developer_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/developer_avatar"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_alignParentRight="true"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        tools:text="@string/placeholder_title"
+        />
+
+    <TextView
+        android:id="@+id/developer_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/developer_avatar"
+        android:layout_below="@id/developer_author"
+        android:layout_alignParentRight="true"
+        tools:text="@string/placeholder_description"
+        style="@style/TextAppearance.Comment" />
+
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Explore GitHub</string>
+
+    <!-- trending fragment -->
+    <string name="trending">Trending</string>
+    <string name="repositories">Repositories</string>
+    <string name="developers">Developers</string>
+    <string name="trending_interval">Change interval</string>
+    <string name="trending_interval_today">Today</string>
+    <string name="trending_interval_week">This week</string>
+    <string name="trending_interval_month">This month</string>
+    <string name="developers_empty_title">Trending developers results are currently being dissected.</string>
+    <string name="developers_empty_description">This may be a few minutes. Now would be a great time to write that novel you’ve always been talking about.</string>
+    <string name="repo_star">Website</string>
+    <string name="repo_unstar">Unstar</string>
+
+    <!-- tools -->
+    <string name="placeholder_title">Amilcar Andrade</string>
+    <string name="placeholder_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+</resources>

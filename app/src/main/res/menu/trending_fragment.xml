@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_query_builder_black_24dp"
+        android:title="@string/trending_interval"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group
+                android:checkableBehavior="single"
+                app:showAsAction="ifRoom">
+
+                <item
+                    android:id="@+id/action_interval_today"
+                    android:title="@string/trending_interval_today" />
+                <item
+                    android:id="@+id/action_interval_week"
+                    android:title="@string/trending_interval_week" />
+                <item
+                    android:id="@+id/action_interval_month"
+                    android:title="@string/trending_interval_month" />
+            </group>
+        </menu>
+    </item>
+</menu>

@@ -1,12 +1,17 @@
 package a2ndrade.explore.data.model;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Repo implements Parcelable {
+    public static final int DEFAULT_COLOR = Color.DKGRAY;
+
     public final String name;
     public final String description;
-    public boolean isStarred;
+    private boolean isStarred;
+    // Avatar color
+    private int color = DEFAULT_COLOR;
 
     public Repo(String name, String description, boolean isStarred) {
         this.name = name;
@@ -20,6 +25,14 @@ public class Repo implements Parcelable {
 
     public void setStarred(boolean isStarred) {
         this.isStarred = isStarred;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public int getColor() {
+        return color;
     }
 
     @Override

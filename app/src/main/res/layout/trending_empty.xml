@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!-- We are re-using this layout for the repos and developers -->
+
+    <ImageView
+        android:id="@+id/trending_empty_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:alpha="0.15"
+        android:src="@drawable/ic_social_domain" />
+
+    <TextView
+        android:id="@+id/trending_empty_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/repos_empty_title"
+        android:textSize="18sp" />
+
+</LinearLayout>

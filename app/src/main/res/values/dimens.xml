@@ -18,4 +18,5 @@
     <dimen name="avatar_padding">4dp</dimen> <!-- (avatar_bounds - avatar_size) / 2 -->
     <dimen name="avatar_margin">12dp</dimen> <!-- padding_normal - avatar_padding -->
 
+
 </resources>

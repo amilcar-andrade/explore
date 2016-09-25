@@ -9,8 +9,8 @@
     <string name="trending_interval_today">Today</string>
     <string name="trending_interval_week">This week</string>
     <string name="trending_interval_month">This month</string>
-    <string name="developers_empty_title">Trending developers results are currently being dissected.</string>
-    <string name="developers_empty_description">This may be a few minutes. Now would be a great time to write that novel you’ve always been talking about.</string>
+    <string name="developers_empty_title">There are no developers here.</string>
+    <string name="repos_empty_title">There are no repositories here.</string>
     <string name="repo_star">Website</string>
     <string name="repo_unstar">Unstar</string>
 

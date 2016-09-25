@@ -12,7 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -40,18 +42,14 @@ public class TrendingListFragment extends Fragment {
     private static final String BUNDLE_TIME_FRAME_KEY = "BUNDLE_TIME_FRAME_KEY";
     private static final String BUNDLE_LANGUAGE_KEY = "BUNDLE_LANGUAGE_KEY";
 
-    @BindString(R.string.trending_interval_month)
-    String month;
-    @BindString(R.string.trending_interval_today)
-    String today;
-    @BindString(R.string.trending_interval_week)
-    String week;
-    @BindView(R.id.repos_list)
-    RecyclerView recyclerView;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(android.R.id.empty)
-    View empty;
+    @BindString(R.string.trending_interval_month) String month;
+    @BindString(R.string.trending_interval_today) String today;
+    @BindString(R.string.trending_interval_week) String week;
+    @BindView(R.id.repos_list) RecyclerView recyclerView;
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
+    @BindView(android.R.id.empty) View empty;
+    @BindView(R.id.trending_empty_icon) ImageView emptyIcon;
+    @BindView(R.id.trending_empty_title) TextView emptyTextView;
 
     private int mode;
     private String timeFrame;
@@ -130,7 +128,7 @@ public class TrendingListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_developers_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_trending_list, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -152,33 +150,16 @@ public class TrendingListFragment extends Fragment {
             @Override
             public Loader<List<Developer>> onCreateLoader(int id, Bundle args) {
                 return new DevelopersTrendingLoader(getActivity(), args);
-
             }
 
             @Override
             public void onLoaderReset(Loader<List<Developer>> loader) {
-                // Loader reset, throw away our data,
-                // unregister any listeners, etc.
-                developersAdapter.clearItems();
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    empty.setVisibility(View.GONE);
-                }
+                onLoaderResetInternal(MODE_DEVELOPERS);
             }
 
             @Override
             public void onLoadFinished(Loader<List<Developer>> loader, List<Developer> data) {
-                if (isAdded()) {
-                    progressBar.setVisibility(View.GONE);
-                    if (data == null || data.isEmpty()) {
-                        empty.setVisibility(View.VISIBLE);
-                        return;
-                    }
-
-                    developersAdapter.addItems(data, timeFrame);
-                    recyclerView.setAdapter(developersAdapter);
-                    recyclerView.setVisibility(View.VISIBLE);
-                }
+                onLoadFinishedInternal(data);
                 loader.cancelLoad();
             }
         };
@@ -187,51 +168,72 @@ public class TrendingListFragment extends Fragment {
             @Override
             public Loader<List<Repo>> onCreateLoader(int id, Bundle args) {
                 return new ReposTrendingLoader(getActivity(), args);
-
             }
 
             @Override
             public void onLoaderReset(Loader<List<Repo>> loader) {
-                // Loader reset, throw away our data,
-                // unregister any listeners, etc.
-                developersAdapter.clearItems();
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    empty.setVisibility(View.GONE);
-                }
+                onLoaderResetInternal(MODE_REPOS);
             }
 
             @Override
             public void onLoadFinished(Loader<List<Repo>> loader, List<Repo> data) {
-                if (isAdded()) {
-                    progressBar.setVisibility(View.GONE);
-                    if (data == null || data.isEmpty()) {
-                        empty.setVisibility(View.VISIBLE);
-                        return;
-                    }
-
-                    reposAdapter.addItems(data, timeFrame);
-                    recyclerView.setAdapter(reposAdapter);
-                    recyclerView.setVisibility(View.VISIBLE);
-                }
+                onLoadFinishedInternal(data);
                 loader.cancelLoad();
             }
         };
 
-        getLoaderManager().initLoader(mode == MODE_DEVELOPERS ? MODE_DEVELOPERS : MODE_REPOS, createLoaderBundle(language, timeFrame),
-                (mode == MODE_DEVELOPERS ? developersCallback : reposCallback));
+        getLoaderManager().initLoader(mode, createLoaderBundle(language, timeFrame), (mode == MODE_DEVELOPERS ? developersCallback : reposCallback));
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         developersCallback = null;
+        reposCallback = null;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void onLoadFinishedInternal(List<?> data) {
+        if (!isAdded()) {
+            return;
+        }
+
+        final boolean isDevelopersMode = mode == MODE_DEVELOPERS;
+        progressBar.setVisibility(View.GONE);
+        if (data == null || data.isEmpty()) {
+            emptyIcon.setImageResource(isDevelopersMode ? R.drawable.ic_action_account_circle : R.drawable.ic_social_domain);
+            emptyTextView.setText(isDevelopersMode ? R.string.developers_empty_title : R.string.repos_empty_title);
+            empty.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (isDevelopersMode) {
+            developersAdapter.addItems((List<Developer>) data, timeFrame);
+        } else  {
+            reposAdapter.addItems((List<Repo>) data, timeFrame);
+        }
+        recyclerView.setAdapter(isDevelopersMode ? developersAdapter : reposAdapter);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void onLoaderResetInternal(int mode) {
+        // Loader reset, throw away our data,
+        // unregister any listeners, etc.
+        if (mode == MODE_DEVELOPERS) {
+            developersAdapter.clearItems();
+        } else {
+            reposAdapter.clearItems();
+        }
+
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+        }
     }
 
     private Bundle createLoaderBundle(String language, String newTimeFrame) {
@@ -243,9 +245,10 @@ public class TrendingListFragment extends Fragment {
 
     private void refreshByTimeFrame(MenuItem item, String newTimeFrame) {
         final LoaderManager loaderManager = getLoaderManager();
-        loaderManager.destroyLoader(LOADER_DEVELOPERS_ID);
+        loaderManager.destroyLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID);
         item.setChecked(true);
         timeFrame = newTimeFrame;
-        loaderManager.restartLoader(LOADER_DEVELOPERS_ID, createLoaderBundle(language, timeFrame), developersCallback);
+        loaderManager.restartLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID, createLoaderBundle(language, timeFrame),
+                mode == MODE_REPOS ? reposCallback : developersCallback);
     }
 }

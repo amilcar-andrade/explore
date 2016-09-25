@@ -6,7 +6,7 @@
     tools:context=".ui.HomeActivity">
 
     <ProgressBar
-        android:id="@android:id/empty"
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -14,8 +14,14 @@
         android:indeterminateTint="@color/colorPrimaryDark"
         android:indeterminateTintMode="src_in" />
 
+    <include
+        android:id="@android:id/empty"
+        layout="@layout/trending_empty"
+        android:visibility="gone" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/repos_list"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"

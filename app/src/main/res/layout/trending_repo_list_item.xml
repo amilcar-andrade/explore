@@ -19,7 +19,7 @@
         android:layout_marginEnd="@dimen/padding_normal"
         android:layout_marginStart="@dimen/padding_normal"
         android:layout_marginTop="@dimen/avatar_padding"
-        android:background="@drawable/avatar_placeholder"
+        android:background="@drawable/repo_placeholder"
         android:gravity="center"
         android:padding="@dimen/avatar_padding"
         android:textAllCaps="true"

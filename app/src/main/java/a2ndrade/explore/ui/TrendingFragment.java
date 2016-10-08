@@ -10,6 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import a2ndrade.explore.R;
 import butterknife.BindView;
@@ -19,6 +22,8 @@ import butterknife.Unbinder;
 public class TrendingFragment extends Fragment {
     private static final int TAB_COUNT = 2;
     private static final int[] TAB_TITLES = {R.string.repositories, R.string.developers};
+    private static final int[] LANGUAGE_LABELS = {R.string.language_all, R.string.language_c,
+            R.string.language_java, R.string.language_javascript, R.string.language_python};
 
     @BindView(R.id.pager)
     ViewPager pager;
@@ -26,6 +31,8 @@ public class TrendingFragment extends Fragment {
     TabLayout tabLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.section_spinner)
+    Spinner spinner;
 
     private Unbinder unbinder;
 
@@ -35,9 +42,48 @@ public class TrendingFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_trending, container, false);
         unbinder = ButterKnife.bind(this, view);
+        spinner.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return LANGUAGE_LABELS.length;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return LANGUAGE_LABELS[position];
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position + 1;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = inflater.inflate(R.layout.trending_ab_spinner_list_item,
+                            parent, false);
+                }
+                ((TextView) convertView.findViewById(android.R.id.text1)).setText(
+                        getString(LANGUAGE_LABELS[position]));
+                return convertView;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = inflater.inflate(R.layout.trending_ab_spinner_list_item_dropdown,
+                            parent, false);
+                }
+                ((TextView) convertView.findViewById(android.R.id.text1)).setText(
+                        getString(LANGUAGE_LABELS[position]));
+                return convertView;
+            }
+        });
+
         pager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
 
             @Override

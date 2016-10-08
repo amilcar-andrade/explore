@@ -27,4 +27,9 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
+    <style name="TextAppearance.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
     </resources>

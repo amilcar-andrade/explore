@@ -9,10 +9,16 @@
     <string name="trending_interval_today">Today</string>
     <string name="trending_interval_week">This week</string>
     <string name="trending_interval_month">This month</string>
-    <string name="developers_empty_title">There are no developers here.</string>
-    <string name="repos_empty_title">There are no repositories here.</string>
+    <string name="developers_empty_title">There are no developers here</string>
+    <string name="repos_empty_title">There are no repositories here</string>
     <string name="repo_star">Website</string>
     <string name="repo_unstar">Unstar</string>
+
+    <string name="language_all">All</string>
+    <string name="language_c">C</string>
+    <string name="language_java">Java</string>
+    <string name="language_javascript">JavaScript</string>
+    <string name="language_python">Python</string>
 
     <!-- tools -->
     <string name="placeholder_title">Amilcar Andrade</string>

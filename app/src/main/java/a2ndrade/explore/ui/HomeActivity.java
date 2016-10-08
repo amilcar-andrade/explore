@@ -1,7 +1,5 @@
 package a2ndrade.explore.ui;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onResumeFragments();
         // TODO: Create interface to retrieve Toolbar and title
         final Toolbar toolbar = (Toolbar) fragment.getView().findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        toolbar.setTitle(trendingTitle);
     }
 }

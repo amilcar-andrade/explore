@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/padding_normal"
+    android:layout_height="?android:listPreferredItemHeightLarge"
+    android:gravity="center_vertical"
+    android:minHeight="?android:listPreferredItemHeightLarge"
     android:paddingEnd="@dimen/padding_normal"
-    android:paddingBottom="@dimen/padding_normal"
-    android:orientation="vertical">
+    android:paddingRight="@dimen/padding_normal">
 
     <a2ndrade.explore.ui.widget.CircularImageView
         android:id="@+id/developer_avatar"
@@ -23,23 +23,24 @@
         android:id="@+id/developer_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/developer_avatar"
-        android:layout_marginRight="@dimen/spacing_normal"
         android:layout_alignParentRight="true"
-        android:lines="1"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_toRightOf="@id/developer_avatar"
         android:ellipsize="end"
-        android:textAppearance="@style/TextAppearance.CommentAuthor"
-        tools:text="@string/placeholder_title"
-        />
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.ListItem"
+        tools:text="@string/placeholder_title" />
 
     <TextView
         android:id="@+id/developer_description"
+        style="@style/TextAppearance.ListItem.Description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/developer_avatar"
-        android:layout_below="@id/developer_author"
         android:layout_alignParentRight="true"
-        tools:text="@string/placeholder_description"
-        style="@style/TextAppearance.Comment" />
+        android:layout_below="@id/developer_author"
+        android:layout_toRightOf="@id/developer_avatar"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="@string/placeholder_description" />
 
 </RelativeLayout>

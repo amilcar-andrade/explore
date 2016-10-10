@@ -10,21 +10,29 @@
 
     </style>
 
-    <style name="TextAppearance.CommentAuthor" parent="@android:style/TextAppearance.Material.Caption">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFeatureSettings">smcp</item>
-        <item name="android:letterSpacing">0.02</item>
-        <item name="android:textColor">@color/text_secondary_dark</item>
-    </style>
-
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@android:color/black</item>
     </style>
 
-    <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
-        <item name="android:textSize">15sp</item>
+    <style name="TextAppearance.ListItem" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.02</item>
         <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
+
+    <!-- android:fontFamily="sans-serif-medium" (roboto medium (android 5.0)) -->
+    <style name="TextAppearance.ListItem.Subheader" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
+
+    <style name="TextAppearance.ListItem.Description" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_tertiary_dark</item>
     </style>
 
     <style name="TextAppearance.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -32,4 +40,4 @@
         <item name="android:textColor">#fff</item>
     </style>
 
-    </resources>
+</resources>

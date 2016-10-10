@@ -1,6 +1,11 @@
 package a2ndrade.explore.ui.adapters;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DevelopersAdapter extends TrendingAbstractAdapter<Developer> {
+    private static final char EM_DASH = "\u2014".toCharArray()[0];
 
     public DevelopersAdapter(LayoutInflater inflater) {
         super(inflater);
@@ -27,12 +33,16 @@ public class DevelopersAdapter extends TrendingAbstractAdapter<Developer> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder h, int position) {
+        final Context context = inflater.getContext();
         if (h instanceof DevelopersViewHolder) {
+            ContextCompat.getColor(context, R.color.text_secondary_dark);
             final Developer developer = items.get(position - 1); // adjust for header
             DevelopersViewHolder holder = (DevelopersViewHolder) h;
             holder.author.setText(developer.name);
-            holder.description.setText(developer.description);
-            Glide.with(inflater.getContext())
+            Spannable span = new SpannableString(developer.repoName + " " + Character.toString(EM_DASH) + " " + developer.description);
+            span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_secondary_dark)), 0, developer.repoName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.description.setText(span);
+            Glide.with(context)
                     .load(developer.developerUrl)
                     .placeholder(R.color.content_placeholder)
                     .into(holder.avatar);
@@ -41,13 +51,13 @@ public class DevelopersAdapter extends TrendingAbstractAdapter<Developer> {
         }
     }
 
-    public static class DevelopersViewHolder extends RecyclerView.ViewHolder {
+    /* package */ static class DevelopersViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.developer_author) TextView author;
         @BindView(R.id.developer_avatar) ImageView avatar;
         @BindView(R.id.developer_description) TextView description;
 
-        public DevelopersViewHolder(View itemView) {
+        /* package */ DevelopersViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

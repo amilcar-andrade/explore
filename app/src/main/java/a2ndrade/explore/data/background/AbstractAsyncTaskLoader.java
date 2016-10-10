@@ -4,11 +4,11 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-public abstract class AbstractAsyncTaskLoader<T> extends AsyncTaskLoader<T> {
+/* package */ abstract class AbstractAsyncTaskLoader<T> extends AsyncTaskLoader<T> {
     private static final String TAG = AbstractAsyncTaskLoader.class.getSimpleName();
     T data;
 
-    public AbstractAsyncTaskLoader(Context context) {
+    /* package */ AbstractAsyncTaskLoader(Context context) {
         super(context);
     }
 

@@ -3,7 +3,7 @@ package a2ndrade.explore.data.background;
 import android.content.Context;
 import android.os.Bundle;
 
-public abstract class TrendingAbstractLoader<T> extends AbstractAsyncTaskLoader<T> {
+/* package */ abstract class TrendingAbstractLoader<T> extends AbstractAsyncTaskLoader<T> {
     private static final String TODAY = "today";
     private static final String WEEKLY = "weekly";
     private static final String MONTHLY = "monthly";
@@ -13,7 +13,7 @@ public abstract class TrendingAbstractLoader<T> extends AbstractAsyncTaskLoader<
 
     String since;
 
-    public TrendingAbstractLoader(Context context, Bundle bundle) {
+    /* package */ TrendingAbstractLoader(Context context, Bundle bundle) {
         super(context);
         String timeFrame = bundle.getString(BUNDLE_TIME_FRAME_KEY, TODAY);
         if (timeFrame.equalsIgnoreCase(TODAY)) {

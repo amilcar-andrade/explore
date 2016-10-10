@@ -8,6 +8,7 @@ public class Developer implements Parcelable {
     public final String developerUrl;
     public final String description;
     public final String name;
+    // Field only needed for a Trending developer
     public final String repoName;
 
     public Developer(String id, String name, String developerUrl, String repoName, String description) {
@@ -18,7 +19,7 @@ public class Developer implements Parcelable {
         this.repoName = repoName;
     }
 
-    protected Developer(Parcel in) {
+    private Developer(Parcel in) {
         id = in.readString();
         developerUrl = in.readString();
         description = in.readString();

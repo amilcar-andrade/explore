@@ -62,7 +62,7 @@ public abstract class TrendingAbstractAdapter<T> extends RecyclerView.Adapter<Re
 
         TextView listHeader;
 
-        public HeaderViewHolder(View itemView) {
+        /* package */ HeaderViewHolder(View itemView) {
             super(itemView);
             listHeader = (TextView) itemView;
         }

@@ -24,9 +24,6 @@
     <style name="TextAppearance.ListItem.Subheader" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-        <item name="android:longClickable">false</item>
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 

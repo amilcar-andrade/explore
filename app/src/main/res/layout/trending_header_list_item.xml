@@ -5,6 +5,8 @@
     android:layout_height="@dimen/listPreferredItemSubHeaderHeight"
     android:paddingLeft="@dimen/padding_normal"
     android:paddingRight="@dimen/padding_normal"
+    android:clickable="false"
+    android:longClickable="false"
     android:gravity="center_vertical"
     android:textAppearance="@style/TextAppearance.ListItem.Subheader"
     tools:text="Today"/>

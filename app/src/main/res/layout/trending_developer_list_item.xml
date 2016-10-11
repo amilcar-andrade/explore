@@ -21,26 +21,21 @@
 
     <TextView
         android:id="@+id/developer_author"
+        style="@style/Widget.Explore.ListItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/spacing_normal"
         android:layout_toRightOf="@id/developer_avatar"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textAppearance="@style/TextAppearance.ListItem"
         tools:text="@string/placeholder_title" />
 
     <TextView
         android:id="@+id/developer_description"
-        style="@style/TextAppearance.ListItem.Description"
+        style="@style/Widget.Explore.ListItem.SecondaryText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/developer_author"
         android:layout_toRightOf="@id/developer_avatar"
-        android:ellipsize="end"
-        android:maxLines="2"
         tools:text="@string/placeholder_description" />
 
 </RelativeLayout>

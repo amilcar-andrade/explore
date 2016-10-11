@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/repo_name"
-        style="@style/TextAppearance.ListItem"
+        style="@style/Widget.Explore.ListItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -36,14 +36,12 @@
 
     <TextView
         android:id="@+id/repo_description"
-        style="@style/TextAppearance.ListItem.Description"
+        style="@style/Widget.Explore.ListItem.SecondaryText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/repo_name"
-        android:layout_toEndOf="@id/repo_letter_avatar"
-        android:ellipsize="end"
-        android:maxLines="3" />
+        android:layout_toEndOf="@id/repo_letter_avatar" />
 
     <Button
         android:id="@+id/repo_button"

@@ -10,6 +10,8 @@
 
     </style>
 
+    <style name="Widget.Explore" parent="android:Widget" />
+
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@android:color/black</item>
     </style>
@@ -27,7 +29,7 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
-    <style name="TextAppearance.ListItem.Description" parent="@android:style/TextAppearance.Material.Body1">
+    <style name="TextAppearance.ListItem.SecondaryText" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_tertiary_dark</item>
     </style>
@@ -35,6 +37,17 @@
     <style name="TextAppearance.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="Widget.Explore.ListItem" parent="Widget.Explore">
+        <item name="android:textAppearance">@style/TextAppearance.ListItem</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="Widget.Explore.ListItem.SecondaryText">
+        <item name="android:textAppearance">@style/TextAppearance.ListItem.SecondaryText</item>
+        <item name="android:lines">2</item>
     </style>
 
 </resources>

@@ -51,7 +51,7 @@ public class DevelopersAdapter extends TrendingAbstractAdapter<Developer> {
         }
     }
 
-    /* package */ static class DevelopersViewHolder extends RecyclerView.ViewHolder {
+    public static class DevelopersViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.developer_author) TextView author;
         @BindView(R.id.developer_avatar) ImageView avatar;

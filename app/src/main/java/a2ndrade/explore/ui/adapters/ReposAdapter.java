@@ -54,7 +54,7 @@ public class ReposAdapter extends TrendingAbstractAdapter<Repo> {
         }
     }
 
-    static class RepoViewHolder extends RecyclerView.ViewHolder {
+    public static class RepoViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.repo_name)
         TextView name;
         @BindView(R.id.repo_description)

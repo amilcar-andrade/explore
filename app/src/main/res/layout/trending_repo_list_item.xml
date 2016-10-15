@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?android:selectableItemBackground"
-    android:minHeight="?android:listPreferredItemHeight"
+    android:background="?android:selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="?android:listPreferredItemHeightLarge"
     android:paddingEnd="@dimen/padding_normal"
-    android:paddingTop="@dimen/padding_normal">
+    android:paddingRight="@dimen/padding_normal">
 
     <TextView
         android:id="@+id/repo_letter_avatar"
@@ -32,7 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@id/repo_letter_avatar" />
+        android:layout_toEndOf="@id/repo_letter_avatar"
+        tools:text="@string/tools_placeholder_title" />
 
     <TextView
         android:id="@+id/repo_description"
@@ -41,16 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/repo_name"
-        android:layout_toEndOf="@id/repo_letter_avatar" />
+        android:layout_toEndOf="@id/repo_letter_avatar"
 
-    <Button
-        android:id="@+id/repo_button"
-        style="?android:borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/repo_description"
-        android:text="@string/repo_star"
-        android:textColor="@color/text_secondary_dark" />
+        tools:text="@string/tools_laceholder_description" />
 
 </RelativeLayout>

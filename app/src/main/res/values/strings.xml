@@ -21,6 +21,6 @@
     <string name="language_python">Python</string>
 
     <!-- tools -->
-    <string name="placeholder_title">Amilcar Andrade</string>
-    <string name="placeholder_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="tools_placeholder_title">Amilcar Andrade</string>
+    <string name="tools_laceholder_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>

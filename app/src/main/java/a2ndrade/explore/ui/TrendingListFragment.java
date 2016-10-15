@@ -1,10 +1,11 @@
 package a2ndrade.explore.ui;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.List;
 
 import a2ndrade.explore.R;
@@ -26,6 +28,7 @@ import a2ndrade.explore.data.model.Developer;
 import a2ndrade.explore.data.model.Repo;
 import a2ndrade.explore.ui.adapters.DevelopersAdapter;
 import a2ndrade.explore.ui.adapters.ReposAdapter;
+import a2ndrade.explore.ui.recyclerview.InsetDividerDecoration;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -131,6 +134,15 @@ public class TrendingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_trending_list, container, false);
         unbinder = ButterKnife.bind(this, view);
+        final Resources res = getResources();
+        HashSet<Class> set = new HashSet<>();
+        set.add(ReposAdapter.RepoViewHolder.class);
+        set.add(DevelopersAdapter.DevelopersViewHolder.class);
+        recyclerView.addItemDecoration(new InsetDividerDecoration(
+                set,
+                res.getDimensionPixelSize(R.dimen.divider_height),
+                res.getDimensionPixelSize(R.dimen.keyline_2),
+                ContextCompat.getColor(getContext(), R.color.divider)));
         return view;
     }
 

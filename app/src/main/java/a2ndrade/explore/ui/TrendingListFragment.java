@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import a2ndrade.explore.R;
 import a2ndrade.explore.data.background.DevelopersTrendingLoader;
@@ -45,6 +46,14 @@ public class TrendingListFragment extends Fragment {
     private static final String BUNDLE_MODE_KEY = "BUNDLE_MODE_KEY";
     private static final String BUNDLE_TIME_FRAME_KEY = "BUNDLE_TIME_FRAME_KEY";
     private static final String BUNDLE_LANGUAGE_KEY = "BUNDLE_LANGUAGE_KEY";
+
+    private static final Set<Class> SET_DIVIDERS;
+    static {
+        Set<Class> set = new HashSet<>(2);
+        set.add(ReposAdapter.RepoViewHolder.class);
+        set.add(DevelopersAdapter.DevelopersViewHolder.class);
+        SET_DIVIDERS = set;
+    }
 
     @BindString(R.string.trending_interval_month) String month;
     @BindString(R.string.trending_interval_today) String today;
@@ -135,11 +144,8 @@ public class TrendingListFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_trending_list, container, false);
         unbinder = ButterKnife.bind(this, view);
         final Resources res = getResources();
-        HashSet<Class> set = new HashSet<>();
-        set.add(ReposAdapter.RepoViewHolder.class);
-        set.add(DevelopersAdapter.DevelopersViewHolder.class);
         recyclerView.addItemDecoration(new InsetDividerDecoration(
-                set,
+                SET_DIVIDERS,
                 res.getDimensionPixelSize(R.dimen.divider_height),
                 res.getDimensionPixelSize(R.dimen.keyline_2),
                 ContextCompat.getColor(getContext(), R.color.divider)));

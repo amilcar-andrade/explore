@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.HomeActivity">
@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:indeterminate="true"
         android:indeterminateTint="@color/colorPrimaryDark"
         android:indeterminateTintMode="src_in" />
@@ -21,10 +22,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/repos_list"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        android:layout_gravity="top" />
+        android:layout_gravity="top"
+        android:visibility="gone"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 </FrameLayout>

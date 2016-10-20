@@ -7,7 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Widget.Explore" parent="android:Widget" />
@@ -48,6 +49,10 @@
     <style name="Widget.Explore.ListItem.SecondaryText">
         <item name="android:textAppearance">@style/TextAppearance.ListItem.SecondaryText</item>
         <item name="android:lines">2</item>
+    </style>
+
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:orientation">vertical</item>
     </style>
 
 </resources>

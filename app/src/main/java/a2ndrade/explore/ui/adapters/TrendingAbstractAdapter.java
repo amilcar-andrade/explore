@@ -58,7 +58,7 @@ public abstract class TrendingAbstractAdapter<T> extends RecyclerView.Adapter<Re
 
     abstract RecyclerView.ViewHolder onCreateViewHolder0(ViewGroup parent);
 
-    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
 
         TextView listHeader;
 

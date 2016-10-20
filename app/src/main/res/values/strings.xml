@@ -13,6 +13,7 @@
     <string name="repos_empty_title">There are no repositories here</string>
     <string name="repo_star">Website</string>
     <string name="repo_unstar">Unstar</string>
+    <string name="error_user_profile_">User profile cannot be loaded</string>
 
     <string name="language_all">All</string>
     <string name="language_c">C</string>
@@ -20,7 +21,25 @@
     <string name="language_javascript">JavaScript</string>
     <string name="language_python">Python</string>
 
+    <!-- user details-->
+    <string name="user_profile">Profile</string>
+    <string name="user_followers">Followers</string>
+    <string name="user_organizations">Organizations</string>
+    <string name="user_following">Following</string>
+
+    <string name="user_follow">Follow</string>
+    <string name="user_location">Location</string>
+
+
     <!-- tools -->
     <string name="tools_placeholder_title">Amilcar Andrade</string>
-    <string name="tools_laceholder_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="tools_placeholder_small_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="tools_placeholder_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="tools_placeholder_large_description">Lorem ipsum dolor sit amet, nunc cras ut,
+        lacus ultrices etiam purus, nibh rutrum, quis ut vel ultrices erat, platea felis nunc mauris perspiciatis.
+        Nulla cras morbi, sed leo, amet hendrerit nec neque ipsum lectus,
+        amet dolor feugiat id mattis vehicula. Blandit in purus phasellus libero auctor.</string>
+
+
 </resources>

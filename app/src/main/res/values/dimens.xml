@@ -23,5 +23,17 @@
     <dimen name="avatar_margin">12dp</dimen> <!-- padding_normal - avatar_padding -->
 
     <dimen name="listPreferredItemSubHeaderHeight">48dp</dimen>     <!-- Subheader height 48dp-->
+    <dimen name="fab_margin">16dp</dimen>
+
+
+    <!-- user details activity -->
+    <dimen name="large_avatar_size">110dp</dimen> <!-- 2 * actionBarSize - 2 * avatar_padding -->
+    <dimen name="large_avatar_margin">28dp</dimen> <!-- spacing_large - avatar_padding -->
+    <dimen name="map_height">168dp</dimen>
+
+
+    <!-- Z-axis elevations -->
+    <dimen name="z_app_bar">4dp</dimen>
+    <dimen name="z_card">2dp</dimen>
 
 </resources>

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,16 +25,24 @@ import java.util.Set;
 
 import a2ndrade.explore.R;
 import a2ndrade.explore.data.background.DevelopersTrendingLoader;
+import a2ndrade.explore.data.background.GitHubService;
 import a2ndrade.explore.data.background.ReposTrendingLoader;
 import a2ndrade.explore.data.model.Developer;
 import a2ndrade.explore.data.model.Repo;
+import a2ndrade.explore.data.model.User;
 import a2ndrade.explore.ui.adapters.DevelopersAdapter;
 import a2ndrade.explore.ui.adapters.ReposAdapter;
+import a2ndrade.explore.ui.adapters.TrendingAbstractAdapter;
 import a2ndrade.explore.ui.recyclerview.InsetDividerDecoration;
+import a2ndrade.explore.ui.recyclerview.OnItemSelectedListener;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class TrendingListFragment extends Fragment {
     private static final String TODAY = "Today";
@@ -58,7 +67,7 @@ public class TrendingListFragment extends Fragment {
     @BindString(R.string.trending_interval_month) String month;
     @BindString(R.string.trending_interval_today) String today;
     @BindString(R.string.trending_interval_week) String week;
-    @BindView(R.id.repos_list) RecyclerView recyclerView;
+    @BindView(R.id.recycler) RecyclerView recyclerView;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
     @BindView(android.R.id.empty) View empty;
     @BindView(R.id.trending_empty_icon) ImageView emptyIcon;
@@ -73,6 +82,8 @@ public class TrendingListFragment extends Fragment {
     private Unbinder unbinder;
     private LoaderManager.LoaderCallbacks<List<Developer>> developersCallback;
     private LoaderManager.LoaderCallbacks<List<Repo>> reposCallback;
+
+    private List<Developer> listItems;
 
     public TrendingListFragment() {
         // Required empty public constructor
@@ -141,7 +152,7 @@ public class TrendingListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_trending_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_user_list, container, false);
         unbinder = ButterKnife.bind(this, view);
         final Resources res = getResources();
         recyclerView.addItemDecoration(new InsetDividerDecoration(
@@ -149,6 +160,20 @@ public class TrendingListFragment extends Fragment {
                 res.getDimensionPixelSize(R.dimen.divider_height),
                 res.getDimensionPixelSize(R.dimen.keyline_2),
                 ContextCompat.getColor(getContext(), R.color.divider)));
+        recyclerView.addOnItemTouchListener(new OnItemSelectedListener(container.getContext()) {
+            @Override
+            public void onItemSelected(RecyclerView.ViewHolder holder, int position) {
+                if (holder instanceof TrendingAbstractAdapter.HeaderViewHolder) {
+                    return;
+                }
+
+                try {
+                    fetchUser(listItems.get(holder.getAdapterPosition() - 1));
+                } catch (Exception e) {
+                    // TODO: Fix this Exception
+                }
+            }
+        });
         return view;
     }
 
@@ -178,6 +203,7 @@ public class TrendingListFragment extends Fragment {
 
             @Override
             public void onLoadFinished(Loader<List<Developer>> loader, List<Developer> data) {
+                listItems = data;
                 onLoadFinishedInternal(data);
                 loader.cancelLoad();
             }
@@ -269,5 +295,23 @@ public class TrendingListFragment extends Fragment {
         timeFrame = newTimeFrame;
         loaderManager.restartLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID, createLoaderBundle(language, timeFrame),
                 mode == MODE_REPOS ? reposCallback : developersCallback);
+    }
+
+    private void fetchUser(Developer developer) {
+        GitHubService service = new RestAdapter.Builder()
+                .setEndpoint(GitHubService.END_POINT)
+                .build()
+                .create(GitHubService.class);
+        service.getUser(developer.login, new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                UserDetailsActivity.startUserDetailsActivity(getActivity(), user);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getContext(), R.string.error_user_profile_, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -44,7 +44,6 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@id/repo_name"
         android:layout_toEndOf="@id/repo_letter_avatar"
-
-        tools:text="@string/tools_laceholder_description" />
+        tools:text="@string/tools_placeholder_description" />
 
 </RelativeLayout>

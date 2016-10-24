@@ -20,19 +20,15 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class TrendingFragment extends Fragment {
-    private static final int TAB_COUNT = 2;
-    private static final int[] TAB_TITLES = {R.string.repositories, R.string.developers};
+    private static final int TAB_COUNT = 3;
+    private static final int[] TAB_TITLES = {R.string.repositories, R.string.developers, R.string.repo_star};
     private static final int[] LANGUAGE_LABELS = {R.string.language_all, R.string.language_c,
             R.string.language_java, R.string.language_javascript, R.string.language_python};
 
-    @BindView(R.id.pager)
-    ViewPager pager;
-    @BindView(R.id.tabs)
-    TabLayout tabLayout;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.section_spinner)
-    Spinner spinner;
+    @BindView(R.id.pager) ViewPager pager;
+    @BindView(R.id.tabs) TabLayout tabLayout;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.section_spinner) Spinner spinner;
 
     private Unbinder unbinder;
 
@@ -94,7 +90,7 @@ public class TrendingFragment extends Fragment {
                     case 1:
                         return TrendingListFragment.newDevelopersInstance();
                 }
-                return null;
+                return IntegrationListFragment.newInstance();
             }
 
             @Override

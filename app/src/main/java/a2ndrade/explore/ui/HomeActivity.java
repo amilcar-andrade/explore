@@ -8,13 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import a2ndrade.explore.R;
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
 
-    @BindString(R.string.trending) String trendingTitle;
     @BindView(R.id.fragment_container) FrameLayout container;
 
     private Fragment fragment;

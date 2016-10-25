@@ -11,7 +11,8 @@
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
     <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
     <color name="divider">#1f000000</color> <!-- 12% black -->
-
+    <color name="bottom_navigation_item_disabled">#999999</color>
+    <color name="bottom_navigation">#212121</color>
 
     <!-- letter random colours -->
     <item name="blue" type="color">#FF33B5E5</item>

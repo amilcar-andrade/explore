@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Explore GitHub</string>
 
+    <!-- home activity -->
+    <string name="bottom_navigation_trending">Trending</string>
+    <string name="bottom_navigation_showcases">Showcases</string>
+    <string name="bottom_navigation_integrations">Integrations</string>
+
     <!-- trending fragment -->
-    <string name="trending">Trending</string>
     <string name="repositories">Repositories</string>
     <string name="developers">Developers</string>
     <string name="trending_interval">Change interval</string>

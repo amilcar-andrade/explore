@@ -13,6 +13,7 @@
     <color name="divider">#1f000000</color> <!-- 12% black -->
     <color name="bottom_navigation_item_disabled">#999999</color>
     <color name="bottom_navigation">#212121</color>
+    <color name="light_grey">#fff5f5f5</color>
 
     <!-- letter random colours -->
     <item name="blue" type="color">#FF33B5E5</item>

@@ -45,8 +45,11 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Un-checked previous item
-                bottomNavigationView.getMenu().findItem(currentMenuId).setChecked(false);
+                final MenuItem previousMenuItem = bottomNavigationView.getMenu().findItem(currentMenuId);
+                if (previousMenuItem != null && item.getItemId() != previousMenuItem.getItemId()) {
+                    // Un-checked previous item
+                    previousMenuItem.setChecked(false);
+                }
                 switch (item.getItemId()) {
                     case R.id.menu_trending:
                         manager.beginTransaction().replace(R.id.fragment_container, TrendingFragment.newInstance()).commit();
@@ -98,7 +101,14 @@ public class HomeActivity extends AppCompatActivity {
 
         final Menu menu = bottomNavigationView.getMenu();
         // Force the menu to not be selected
-        menu.findItem(R.id.menu_trending).setChecked(false);
-        menu.findItem(currentMenuId).setChecked(true);
+        final MenuItem firstMenuItem = menu.findItem(R.id.menu_trending);
+        if (firstMenuItem != null) {
+            firstMenuItem.setChecked(false);
+        }
+
+        final MenuItem currentMenuItem = menu.findItem(currentMenuId);
+        if (currentMenuItem != null) {
+            currentMenuItem.setChecked(true);
+        }
     }
 }

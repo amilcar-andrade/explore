@@ -43,7 +43,7 @@ public class DevelopersAdapter extends TrendingAbstractAdapter<Developer> {
             span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_secondary_dark)), 0, developer.repoName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             holder.description.setText(span);
             Glide.with(context)
-                    .load(developer.developerUrl)
+                    .load(developer.avatar_url)
                     .placeholder(R.color.content_placeholder)
                     .into(holder.avatar);
         } else if (h instanceof HeaderViewHolder) {

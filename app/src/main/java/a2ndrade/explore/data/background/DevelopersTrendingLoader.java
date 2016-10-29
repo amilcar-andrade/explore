@@ -33,14 +33,35 @@ public class DevelopersTrendingLoader extends TrendingAbstractLoader<List<Develo
         final int size = description.size();
         data = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
+            // login and name comes together in the same string
+            String loginAndName = names.get(i).text();
             data.add(new Developer(
-                    description.get(i).id(),
-                    names.get(i).text(),
+                    extractLogin(loginAndName),
+                    extractName(loginAndName),
                     avatars.get(i).absUrl("src"),
                     repo.get(i).text(),
                     des.get(i).text()));
         }
 
         return data;
+    }
+
+    private String extractName(String loginAndName) {
+        try {
+            int open = loginAndName.indexOf("(") + 1;
+            int close = loginAndName.indexOf(")");
+            return loginAndName.substring(open, close).trim();
+        } catch (Exception e) {
+            return loginAndName;
+        }
+    }
+
+    private String extractLogin(String loginAndName) {
+        try {
+            int open = loginAndName.indexOf("(");
+            return loginAndName.substring(0, open).trim();
+        } catch (Exception e) {
+            return loginAndName;
+        }
     }
 }

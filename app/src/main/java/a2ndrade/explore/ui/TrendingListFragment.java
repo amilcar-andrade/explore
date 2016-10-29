@@ -3,7 +3,6 @@ package a2ndrade.explore.ui;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
@@ -32,8 +31,6 @@ import a2ndrade.explore.ui.adapters.ReposAdapter;
 import a2ndrade.explore.ui.recyclerview.InsetDividerDecoration;
 import butterknife.BindString;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class TrendingListFragment extends AbstractBaseFragment {
     private static final String TODAY = "Today";
@@ -58,7 +55,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
     @BindString(R.string.trending_interval_month) String month;
     @BindString(R.string.trending_interval_today) String today;
     @BindString(R.string.trending_interval_week) String week;
-    @BindView(R.id.repos_list) RecyclerView recyclerView;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
     @BindView(android.R.id.empty) View empty;
     @BindView(R.id.trending_empty_icon) ImageView emptyIcon;
@@ -209,7 +206,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
 
     @Override
     int getLayoutId() {
-        return R.layout.fragment_trending_list;
+        return R.layout.fragment_simple_list;
     }
 
     private void onLoadFinishedInternal(List<?> data) {

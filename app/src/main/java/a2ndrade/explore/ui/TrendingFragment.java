@@ -16,10 +16,8 @@ import android.widget.TextView;
 
 import a2ndrade.explore.R;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
-public class TrendingFragment extends Fragment {
+public class TrendingFragment extends AbstractBaseFragment {
     private static final int TAB_COUNT = 2;
     private static final int[] TAB_TITLES = {R.string.developers, R.string.repositories};
     private static final int[] LANGUAGE_LABELS = {R.string.language_all, R.string.language_c,
@@ -34,17 +32,12 @@ public class TrendingFragment extends Fragment {
     @BindView(R.id.section_spinner)
     Spinner spinner;
 
-    private Unbinder unbinder;
-
     public static TrendingFragment newInstance() {
         return new TrendingFragment();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_trending, container, false);
-        unbinder = ButterKnife.bind(this, view);
+    public void onCreateView0(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         spinner.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -108,12 +101,10 @@ public class TrendingFragment extends Fragment {
             }
         });
         tabLayout.setupWithViewPager(pager);
-        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    int getLayoutId() {
+        return R.layout.fragment_trending;
     }
 }

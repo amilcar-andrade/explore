@@ -35,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class TrendingListFragment extends Fragment {
+public class TrendingListFragment extends AbstractBaseFragment {
     private static final String TODAY = "Today";
     private static final int LOADER_DEVELOPERS_ID = 1;
     private static final int LOADER_REPOS_ID = 2;
@@ -70,7 +70,6 @@ public class TrendingListFragment extends Fragment {
     private ReposAdapter reposAdapter;
     private DevelopersAdapter developersAdapter;
 
-    private Unbinder unbinder;
     private LoaderManager.LoaderCallbacks<List<Developer>> developersCallback;
     private LoaderManager.LoaderCallbacks<List<Repo>> reposCallback;
 
@@ -140,16 +139,13 @@ public class TrendingListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_trending_list, container, false);
-        unbinder = ButterKnife.bind(this, view);
+    public void onCreateView0(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final Resources res = getResources();
         recyclerView.addItemDecoration(new InsetDividerDecoration(
                 SET_DIVIDERS,
                 res.getDimensionPixelSize(R.dimen.divider_height),
                 res.getDimensionPixelSize(R.dimen.keyline_2),
                 ContextCompat.getColor(getContext(), R.color.divider)));
-        return view;
     }
 
     @Override
@@ -212,9 +208,8 @@ public class TrendingListFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    int getLayoutId() {
+        return R.layout.fragment_trending_list;
     }
 
     private void onLoadFinishedInternal(List<?> data) {

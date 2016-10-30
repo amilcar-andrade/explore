@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import a2ndrade.explore.R;
 import a2ndrade.explore.data.background.IntegrationLoader;
 import a2ndrade.explore.data.model.Integration;
 import a2ndrade.explore.data.model.IntegrationCategory;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +39,10 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
     TextView emptyTextView;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindString(R.string.categories)
+    String toolbarTitle;
 
     @Override
     public void onCreateView0(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,9 +50,7 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
     }
 
     public static IntegrationsFragment newInstance() {
-        
         Bundle args = new Bundle();
-        
         IntegrationsFragment fragment = new IntegrationsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -55,6 +60,9 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(LOADER_INTEGRATION_ID, null, this);
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setTitle(toolbarTitle);
     }
 
     @Override
@@ -76,7 +84,7 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
 
     @Override
     int getLayoutId() {
-        return R.layout.fragment_simple_list;
+        return R.layout.fragment_integrations;
     }
 
     /*package*/ static class IntegrationCategoryAdapter extends RecyclerView.Adapter<IntegrationCategoryAdapter.IntegrationCategoryHolder> {

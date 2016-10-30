@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_trending"
         android:enabled="true"
-        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:icon="@drawable/ic_whatshot_white_24dp"
         android:title="@string/bottom_navigation_trending"
         app:showAsAction="ifRoom" />
     <item
@@ -16,7 +16,7 @@
     <item
         android:id="@+id/menu_showcases"
         android:enabled="true"
-        android:icon="@drawable/ic_rss_feed_black_24dp"
+        android:icon="@drawable/ic_rss_feed_white_24dp"
         android:title="@string/bottom_navigation_showcases"
         app:showAsAction="ifRoom" />
 </menu>

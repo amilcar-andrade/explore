@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 
 public class IntegrationsFragment extends AbstractBaseFragment implements LoaderManager.LoaderCallbacks<List<IntegrationCategory>> {
     private static final int LOADER_INTEGRATION_ID = 1251;
+    public static final String TAG = IntegrationsFragment.class.getSimpleName();
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -60,9 +61,16 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(LOADER_INTEGRATION_ID, null, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setTitle(toolbarTitle);
+        if (activity != null) {
+            activity.setSupportActionBar(toolbar);
+            activity.getSupportActionBar().setTitle(toolbarTitle);
+        }
     }
 
     @Override

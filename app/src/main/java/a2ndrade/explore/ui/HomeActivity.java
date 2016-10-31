@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -45,7 +44,8 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                final MenuItem previousMenuItem = bottomNavigationView.getMenu().findItem(currentMenuId);
+                final Menu menu = bottomNavigationView.getMenu();
+                final MenuItem previousMenuItem = menu.findItem(currentMenuId);
                 if (previousMenuItem != null && item.getItemId() != previousMenuItem.getItemId()) {
                     // Un-checked previous item
                     previousMenuItem.setChecked(false);
@@ -54,14 +54,17 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.menu_trending:
                         manager.beginTransaction().replace(R.id.fragment_container, TrendingFragment.newInstance()).commit();
                         currentMenuId = item.getItemId();
+                        menu.findItem(currentMenuId).setChecked(true);
                         return true;
                     case R.id.menu_integrations:
                         manager.beginTransaction().replace(R.id.fragment_container, IntegrationsFragment.newInstance()).commit();
                         currentMenuId = item.getItemId();
+                        menu.findItem(currentMenuId).setChecked(true);
                         return true;
                     case R.id.menu_showcases:
                         manager.beginTransaction().replace(R.id.fragment_container, ShowcasesFragment.newInstance()).commit();
                         currentMenuId = item.getItemId();
+                        menu.findItem(currentMenuId).setChecked(true);
                         return true;
                 }
                 return false;
@@ -73,23 +76,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(BUNDLE_CURRENT_MENU_ID, currentMenuId);
-    }
-
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        // TODO: Create interface to retrieve Toolbar and title
-        try {
-            final FragmentManager manager = getSupportFragmentManager();
-            Fragment fragment = manager.findFragmentById(R.id.fragment_container);
-
-            final Toolbar toolbar = (Toolbar) fragment.getView().findViewById(R.id.toolbar);
-            toolbar.setTitle("");
-            setSupportActionBar(toolbar);
-        } catch (Exception e) {
-            // TODO: Fix this
-        }
-
     }
 
     private void updateMenuSelection() {

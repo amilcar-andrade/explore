@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,13 @@ import a2ndrade.explore.R;
 import butterknife.BindView;
 
 public class TrendingFragment extends AbstractBaseFragment {
+    private static final String BLANK_STRING = "";
     private static final int TAB_COUNT = 2;
     private static final int[] TAB_TITLES = {R.string.developers, R.string.repositories};
     private static final int[] LANGUAGE_LABELS = {R.string.language_all, R.string.language_c,
             R.string.language_java, R.string.language_javascript, R.string.language_python};
+
+    public static final String TAG = TrendingFragment.class.getSimpleName();
 
     @BindView(R.id.pager)
     ViewPager pager;
@@ -101,6 +105,16 @@ public class TrendingFragment extends AbstractBaseFragment {
             }
         });
         tabLayout.setupWithViewPager(pager);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            activity.setSupportActionBar(toolbar);
+            activity.getSupportActionBar().setTitle(BLANK_STRING);
+        }
     }
 
     @Override

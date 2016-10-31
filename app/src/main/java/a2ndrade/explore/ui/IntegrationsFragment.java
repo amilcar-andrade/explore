@@ -156,7 +156,7 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
             holder.description.setText(integration.description);
             Glide.with(inflater.getContext())
                     .load(integration.avatar_url)
-                    .placeholder(android.R.color.white)
+                    .placeholder(R.color.content_placeholder)
                     .into(holder.avatar);
         }
 

@@ -22,6 +22,11 @@
     <dimen name="avatar_padding">4dp</dimen> <!-- (avatar_bounds - avatar_size) / 2 -->
     <dimen name="avatar_margin">12dp</dimen> <!-- padding_normal - avatar_padding -->
 
+    <dimen name="medium_avatar_size">80dp</dimen>
+    <dimen name="medium_avatar_bounds">48dp</dimen>
+    <dimen name="medium_avatar_padding">4dp</dimen> <!-- (medium_avatar_bounds - medium_avatar_size) / 2 -->
+    <dimen name="medium_avatar_margin">12dp</dimen> <!-- padding_normal - medium_avatar_padding -->
+
     <dimen name="listPreferredItemSubHeaderHeight">48dp</dimen> <!-- Subheader height 48dp-->
 
     <!-- Z-axis elevations -->

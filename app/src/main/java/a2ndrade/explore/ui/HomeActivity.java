@@ -54,13 +54,13 @@ public class HomeActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.menu_trending:
-                        swapFragment(getSupportFragmentManager(), TrendingFragment.TAG);
+                        swapFragment(TrendingFragment.TAG);
                         break;
                     case R.id.menu_integrations:
-                        swapFragment(getSupportFragmentManager(), IntegrationsFragment.TAG);
+                        swapFragment(IntegrationsFragment.TAG);
                         break;
                     case R.id.menu_showcases:
-                        swapFragment(getSupportFragmentManager(), ShowcasesFragment.TAG);
+                        swapFragment(ShowcasesFragment.TAG);
                         break;
                 }
                 currentMenuId = item.getItemId();
@@ -70,7 +70,8 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    void swapFragment(FragmentManager manager, String newFragmentTag) {
+    void swapFragment(String newFragmentTag) {
+        final FragmentManager manager = getSupportFragmentManager();
         final FragmentTransaction ft = manager.beginTransaction();
         // Get the previous fragment one and detach it instead of removing it
         final Fragment fragmentToDetach = manager.findFragmentByTag(currentFragmentTag);

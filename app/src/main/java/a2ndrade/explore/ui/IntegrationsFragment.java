@@ -175,7 +175,7 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
         @Override
         public void onBindViewHolder(IntegrationAdapterHolder holder, int position) {
             final Integration integration = items.get(position);
-            holder.name.setText(integration.name);
+            holder.title.setText(integration.name);
             holder.description.setText(integration.description);
             Glide.with(inflater.getContext())
                     .load(integration.avatar_url)
@@ -189,7 +189,7 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
         }
 
         /*package*/ static class IntegrationAdapterHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.name) TextView name;
+            @BindView(R.id.title) TextView title;
             @BindView(R.id.description) TextView description;
             @BindView(R.id.avatar) ImageView avatar;
 

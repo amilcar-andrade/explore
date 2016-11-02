@@ -210,7 +210,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
     }
 
     private void onLoadFinishedInternal(List<?> data) {
-        if (!isAdded() && !isVisible()) {
+        if (TrendingListFragment.this.getView() == null) {
             return;
         }
 

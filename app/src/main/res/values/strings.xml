@@ -26,6 +26,8 @@
 
     <!-- integrations fragment -->
     <string name="categories">Categories</string>
+    <string name="integration_filter">Change filter</string>
+
 
     <!-- tools -->
     <string name="tools_placeholder_title">Amilcar Andrade</string>

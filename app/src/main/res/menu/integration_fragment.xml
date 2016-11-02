@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_integrations"
+        android:icon="@drawable/ic_filter_list_black_24dp"
+        android:title="@string/integration_filter"
+        app:showAsAction="ifRoom">
+    </item>
+</menu>

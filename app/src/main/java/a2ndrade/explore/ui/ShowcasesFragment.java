@@ -9,6 +9,8 @@ import a2ndrade.explore.R;
 
 public class ShowcasesFragment extends AbstractBaseFragment {
 
+    public static final String TAG = ShowcasesFragment.class.getSimpleName();;
+
     @Override
     public void onCreateView0(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // no-op

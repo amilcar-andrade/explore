@@ -103,6 +103,9 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
 
     @Override
     public void onLoadFinished(Loader<List<IntegrationCategory>> loader, List<IntegrationCategory> data) {
+        if (getView() == null) {
+            return;
+        }
         progressBar.setVisibility(View.GONE);
         recyclerView.setAdapter(new IntegrationCategoryAdapter(data, getActivity().getLayoutInflater()));
         recyclerView.setVisibility(View.VISIBLE);

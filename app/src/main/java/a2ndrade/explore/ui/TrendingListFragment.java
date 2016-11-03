@@ -198,8 +198,8 @@ public class TrendingListFragment extends AbstractBaseFragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onDestroy() {
+        super.onDestroy();
         developersCallback = null;
         reposCallback = null;
     }

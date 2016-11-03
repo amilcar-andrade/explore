@@ -92,6 +92,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bottomNavigationView = null;
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(BUNDLE_CURRENT_MENU_ID, currentMenuId);

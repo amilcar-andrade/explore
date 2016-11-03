@@ -27,8 +27,7 @@
             android:paddingLeft="@dimen/padding_normal"
             android:paddingRight="@dimen/padding_normal"
             android:paddingTop="@dimen/medium_card_title_padding_top"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="@android:color/black" />
+            android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
         <TextView
             android:id="@+id/description"

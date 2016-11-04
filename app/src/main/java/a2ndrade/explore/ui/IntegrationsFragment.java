@@ -29,7 +29,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IntegrationsFragment extends AbstractBaseFragment implements LoaderManager.LoaderCallbacks<List<IntegrationCategory>> {
+public class IntegrationsFragment extends AbstractBaseFragment {
     private static final int LOADER_INTEGRATION_ID = 1251;
     public static final String TAG = IntegrationsFragment.class.getSimpleName();
 
@@ -83,7 +83,13 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(LOADER_INTEGRATION_ID, null, this);
+        loaderManager.initLoader(LOADER_INTEGRATION_ID, null, integrationLoader);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        integrationLoader = null;
     }
 
     @Override
@@ -94,26 +100,6 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
             activity.setSupportActionBar(toolbar);
             activity.getSupportActionBar().setTitle(toolbarTitle);
         }
-    }
-
-    @Override
-    public Loader<List<IntegrationCategory>> onCreateLoader(int id, Bundle args) {
-        return new IntegrationLoader(getActivity().getApplicationContext());
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<IntegrationCategory>> loader, List<IntegrationCategory> data) {
-        if (getView() == null) {
-            return;
-        }
-        progressBar.setVisibility(View.GONE);
-        recyclerView.setAdapter(new IntegrationCategoryAdapter(data, getActivity().getLayoutInflater()));
-        recyclerView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<IntegrationCategory>> loader) {
-        // No-operation
     }
 
     @Override
@@ -202,4 +188,26 @@ public class IntegrationsFragment extends AbstractBaseFragment implements Loader
             }
         }
     }
+
+    private LoaderManager.LoaderCallbacks<List<IntegrationCategory>> integrationLoader = new LoaderManager.LoaderCallbacks<List<IntegrationCategory>>() {
+        @Override
+        public Loader<List<IntegrationCategory>> onCreateLoader(int id, Bundle args) {
+            return new IntegrationLoader(getActivity());
+        }
+
+        @Override
+        public void onLoadFinished(Loader<List<IntegrationCategory>> loader, List<IntegrationCategory> data) {
+            if (!isAdded() || getView() == null) {
+                return;
+            }
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setAdapter(new IntegrationCategoryAdapter(data, getActivity().getLayoutInflater()));
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<IntegrationCategory>> loader) {
+            // No-operation
+        }
+    };
 }

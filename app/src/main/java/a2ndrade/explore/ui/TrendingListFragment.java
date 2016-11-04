@@ -67,9 +67,6 @@ public class TrendingListFragment extends AbstractBaseFragment {
     private ReposAdapter reposAdapter;
     private DevelopersAdapter developersAdapter;
 
-    private LoaderManager.LoaderCallbacks<List<Developer>> developersCallback;
-    private LoaderManager.LoaderCallbacks<List<Repo>> reposCallback;
-
     public TrendingListFragment() {
         // Required empty public constructor
     }
@@ -97,6 +94,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
         setHasOptionsMenu(true);
         timeFrame = savedInstanceState == null ? TODAY : savedInstanceState.getString(BUNDLE_TIME_FRAME_KEY);
         language = savedInstanceState == null ? "" : savedInstanceState.getString(BUNDLE_LANGUAGE_KEY);
+        loaderManager = getLoaderManager();
     }
 
     @Override
@@ -158,43 +156,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
         final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         reposAdapter = new ReposAdapter(layoutInflater);
         developersAdapter = new DevelopersAdapter(layoutInflater);
-        developersCallback = new LoaderManager.LoaderCallbacks<List<Developer>>() {
-            @Override
-            public Loader<List<Developer>> onCreateLoader(int id, Bundle args) {
-                return new DevelopersTrendingLoader(getActivity(), args);
-            }
-
-            @Override
-            public void onLoaderReset(Loader<List<Developer>> loader) {
-                onLoaderResetInternal(MODE_DEVELOPERS);
-            }
-
-            @Override
-            public void onLoadFinished(Loader<List<Developer>> loader, List<Developer> data) {
-                onLoadFinishedInternal(data);
-                loader.cancelLoad();
-            }
-        };
-
-        reposCallback = new LoaderManager.LoaderCallbacks<List<Repo>>() {
-            @Override
-            public Loader<List<Repo>> onCreateLoader(int id, Bundle args) {
-                return new ReposTrendingLoader(getActivity(), args);
-            }
-
-            @Override
-            public void onLoaderReset(Loader<List<Repo>> loader) {
-                onLoaderResetInternal(MODE_REPOS);
-            }
-
-            @Override
-            public void onLoadFinished(Loader<List<Repo>> loader, List<Repo> data) {
-                onLoadFinishedInternal(data);
-                loader.cancelLoad();
-            }
-        };
-
-        getLoaderManager().initLoader(mode, createLoaderBundle(language, timeFrame), (mode == MODE_DEVELOPERS ? developersCallback : reposCallback));
+        loaderManager.initLoader(mode, createLoaderBundle(language, timeFrame), (mode == MODE_DEVELOPERS ? developersCallback : reposCallback));
     }
 
     @Override
@@ -202,11 +164,85 @@ public class TrendingListFragment extends AbstractBaseFragment {
         super.onDestroy();
         developersCallback = null;
         reposCallback = null;
+        // See: http://stackoverflow.com/a/32288504/1768722
+        loaderManager = null;
     }
 
     @Override
     int getLayoutId() {
         return R.layout.fragment_simple_list;
+    }
+
+    private void refreshByTimeFrame(MenuItem item, String newTimeFrame) {
+        loaderManager.destroyLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID);
+        item.setChecked(true);
+        timeFrame = newTimeFrame;
+        loaderManager.restartLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID, createLoaderBundle(language, timeFrame),
+                mode == MODE_REPOS ? reposCallback : developersCallback);
+    }
+
+    private Bundle createLoaderBundle(String language, String newTimeFrame) {
+        Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_LANGUAGE_KEY, language);
+        bundle.putString(BUNDLE_TIME_FRAME_KEY, newTimeFrame);
+        return bundle;
+    }
+
+    /**
+     * LoaderCallbacks for the {@link DevelopersTrendingLoader} that loads all developers of the list.
+     */
+    private LoaderManager.LoaderCallbacks<List<Developer>> developersCallback = new LoaderManager.LoaderCallbacks<List<Developer>>() {
+        @Override
+        public Loader<List<Developer>> onCreateLoader(int id, Bundle args) {
+            return new DevelopersTrendingLoader(getContext().getApplicationContext(), args);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<Developer>> loader) {
+            onLoaderResetInternal(MODE_DEVELOPERS);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<List<Developer>> loader, List<Developer> data) {
+            onLoadFinishedInternal(data);
+            loader.cancelLoad();
+        }
+    };
+
+    /**
+     * LoaderCallbacks for the {@link ReposTrendingLoader} that loads all developers of the list.
+     */
+    private LoaderManager.LoaderCallbacks<List<Repo>> reposCallback = new LoaderManager.LoaderCallbacks<List<Repo>>() {
+        @Override
+        public Loader<List<Repo>> onCreateLoader(int id, Bundle args) {
+            return new ReposTrendingLoader(getActivity(), args);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<Repo>> loader) {
+            onLoaderResetInternal(MODE_REPOS);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<List<Repo>> loader, List<Repo> data) {
+            onLoadFinishedInternal(data);
+            loader.cancelLoad();
+        }
+    };
+
+    private void onLoaderResetInternal(int mode) {
+        // Loader reset, throw away our data,
+        // unregister any listeners, etc.
+        if (mode == MODE_DEVELOPERS) {
+            developersAdapter.clearItems();
+        } else {
+            reposAdapter.clearItems();
+        }
+
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+        }
     }
 
     private void onLoadFinishedInternal(List<?> data) {
@@ -230,36 +266,5 @@ public class TrendingListFragment extends AbstractBaseFragment {
         }
         recyclerView.setAdapter(isDevelopersMode ? developersAdapter : reposAdapter);
         recyclerView.setVisibility(View.VISIBLE);
-    }
-
-    private void onLoaderResetInternal(int mode) {
-        // Loader reset, throw away our data,
-        // unregister any listeners, etc.
-        if (mode == MODE_DEVELOPERS) {
-            developersAdapter.clearItems();
-        } else {
-            reposAdapter.clearItems();
-        }
-
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
-            empty.setVisibility(View.GONE);
-        }
-    }
-
-    private Bundle createLoaderBundle(String language, String newTimeFrame) {
-        Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_LANGUAGE_KEY, language);
-        bundle.putString(BUNDLE_TIME_FRAME_KEY, newTimeFrame);
-        return bundle;
-    }
-
-    private void refreshByTimeFrame(MenuItem item, String newTimeFrame) {
-        final LoaderManager loaderManager = getLoaderManager();
-        loaderManager.destroyLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID);
-        item.setChecked(true);
-        timeFrame = newTimeFrame;
-        loaderManager.restartLoader(mode == MODE_DEVELOPERS ? LOADER_DEVELOPERS_ID : LOADER_REPOS_ID, createLoaderBundle(language, timeFrame),
-                mode == MODE_REPOS ? reposCallback : developersCallback);
     }
 }

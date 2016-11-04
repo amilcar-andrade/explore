@@ -35,7 +35,6 @@ public class DevelopersAdapter extends TrendingAbstractAdapter<Developer> {
     public void onBindViewHolder(RecyclerView.ViewHolder h, int position) {
         final Context context = inflater.getContext();
         if (h instanceof DevelopersViewHolder) {
-            ContextCompat.getColor(context, R.color.text_secondary_dark);
             final Developer developer = items.get(position - 1); // adjust for header
             DevelopersViewHolder holder = (DevelopersViewHolder) h;
             holder.author.setText(developer.name);

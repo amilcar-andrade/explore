@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import a2ndrade.explore.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String BUNDLE_CURRENT_FRAGMENT_TAG = "BUNDLE_CURRENT_FRAGMENT_TAG";
@@ -23,12 +24,13 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
     int currentMenuId = R.id.menu_trending;
     String currentFragmentTag = TrendingFragment.TAG;
+    private Unbinder bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ButterKnife.bind(HomeActivity.this);
+        bind = ButterKnife.bind(HomeActivity.this);
 
         if (savedInstanceState != null) {
             currentMenuId = savedInstanceState.getInt(BUNDLE_CURRENT_MENU_ID);
@@ -94,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bottomNavigationView = null;
+        bind.unbind();
     }
 
     @Override

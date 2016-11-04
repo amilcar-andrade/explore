@@ -3,6 +3,7 @@ package a2ndrade.explore.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,20 @@ import butterknife.Unbinder;
 
 public abstract class AbstractBaseFragment extends Fragment {
     private Unbinder bind;
+    LoaderManager loaderManager;
 
-    @Nullable
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loaderManager = getLoaderManager();
+    }
+
     /**
      * Template method pattern: We know we always want to use ButterKnife for finding views.
      * So instead of doing it in each Fragment we just add the ButterKnife binding here.
      */
+    @Nullable
+    @Override
     public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(getLayoutId(), container, false);
@@ -31,6 +39,12 @@ public abstract class AbstractBaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         bind.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        loaderManager = null;
     }
 
     abstract int getLayoutId();

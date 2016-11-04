@@ -62,7 +62,7 @@ public class ReposAdapter extends TrendingAbstractAdapter<Repo> {
         @BindView(R.id.repo_letter_avatar)
         TextView avatar;
 
-        public RepoViewHolder(View itemView) {
+        RepoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

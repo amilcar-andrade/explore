@@ -22,14 +22,14 @@ public class ReposTrendingLoader extends TrendingAbstractLoader<List<Repo>> {
     @Override
     protected List<Repo> loadInBackground0() throws Exception {
         Document document = Jsoup.connect(END_POINT + QUERY_PARAM_SINCE + since).get();
-        final Elements repoList = document.select(".repo-list-item");
-        final Elements repo = repoList.select(".repo-list-name");
-        final Elements des = repoList.select(".repo-list-description");
+        final Elements repoList = document.getElementsByClass("repo-list");
+        final Elements repoName = repoList.select(".d-inline-block.col-9.mb-1");
+        final Elements descriptionRepo = repoList.select(".col-9.d-inline-block.text-gray.m-0.pr-4");
 
-        final int size = repo.size();
+        final int size = repoName.size();
         data = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            data.add(new Repo(repo.get(i).text(), des.get(i).text(), true));
+            data.add(new Repo(repoName.get(i).text(), descriptionRepo.get(i).text(), true));
         }
 
         return data;

@@ -35,10 +35,12 @@ public class DevelopersTrendingLoader extends TrendingAbstractLoader<List<Develo
         for (int i = 0; i < size; i++) {
             // login and name comes together in the same string
             String loginAndName = names.get(i).text();
+            // TODO: Get real users in one request - https://twitter.com/a2ndradeG/status/795036329755213824
+            final String avatarUrl = avatars.get(i).absUrl("src").replace("192", "500");
             data.add(new Developer(
                     extractLogin(loginAndName),
                     extractName(loginAndName),
-                    avatars.get(i).absUrl("src"),
+                    avatarUrl,
                     repo.get(i).text(),
                     des.get(i).text()));
         }

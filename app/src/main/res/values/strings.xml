@@ -28,6 +28,7 @@
     <string name="categories">Categories</string>
     <string name="integration_filter">Change filter</string>
 
+    <string name="transition_player_avatar" translatable="false">transition_player_avatar</string>
 
     <!-- tools -->
     <string name="tools_placeholder_title">Amilcar Andrade</string>

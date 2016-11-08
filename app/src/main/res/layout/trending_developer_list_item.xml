@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="?android:listPreferredItemHeightLarge"
     android:gravity="center_vertical"
+    android:foreground="?android:selectableItemBackground"
     android:minHeight="?android:listPreferredItemHeightLarge"
     android:paddingEnd="@dimen/padding_normal"
     android:paddingRight="@dimen/padding_normal">
@@ -17,7 +18,7 @@
         android:layout_marginEnd="@dimen/avatar_margin"
         android:layout_marginStart="@dimen/avatar_margin"
         android:padding="@dimen/avatar_padding"
-        android:src="@drawable/avatar_placeholder" />
+        android:src="@drawable/avatar_placeholder"/>
 
     <TextView
         android:id="@+id/developer_author"

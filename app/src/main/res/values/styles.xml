@@ -10,6 +10,13 @@
 
     </style>
 
+    <style name="AppTheme.User">
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/user_details_enter</item>
+
+    </style>
+
     <style name="Widget.Explore" parent="android:Widget" />
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

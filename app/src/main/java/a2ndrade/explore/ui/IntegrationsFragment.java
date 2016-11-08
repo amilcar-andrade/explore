@@ -48,15 +48,18 @@ public class IntegrationsFragment extends AbstractBaseFragment {
     @BindString(R.string.categories)
     String toolbarTitle;
 
-    @Override
-    public void onCreateView0(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // no-op
-    }
+    IntegrationCategoryAdapter adapter;
+    List<IntegrationCategory> data;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateView0(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // no-op
     }
 
     @Override
@@ -200,8 +203,10 @@ public class IntegrationsFragment extends AbstractBaseFragment {
             if (!isAdded() || getView() == null) {
                 return;
             }
+            IntegrationsFragment.this.data = data;
             progressBar.setVisibility(View.GONE);
-            recyclerView.setAdapter(new IntegrationCategoryAdapter(data, getActivity().getLayoutInflater()));
+            adapter = new IntegrationCategoryAdapter(data, getActivity().getLayoutInflater());
+            recyclerView.setAdapter(adapter);
             recyclerView.setVisibility(View.VISIBLE);
         }
 

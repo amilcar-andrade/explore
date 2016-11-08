@@ -6,32 +6,29 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import a2ndrade.explore.R;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AbstractBaseActivity {
     private static final String BUNDLE_CURRENT_FRAGMENT_TAG = "BUNDLE_CURRENT_FRAGMENT_TAG";
     private static final String BUNDLE_CURRENT_MENU_ID = "BUNDLE_CURRENT_MENU_ID";
 
-    @BindView(R.id.fragment_container) FrameLayout container;
-    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView bottomNavigationView;
+
     int currentMenuId = R.id.menu_trending;
     String currentFragmentTag = TrendingFragment.TAG;
-    private Unbinder bind;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        bind = ButterKnife.bind(HomeActivity.this);
+    int getLayoutId() {
+        return R.layout.activity_home;
+    }
 
+    @Override
+    void onCreate0(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             currentMenuId = savedInstanceState.getInt(BUNDLE_CURRENT_MENU_ID);
             currentFragmentTag = savedInstanceState.getString(BUNDLE_CURRENT_FRAGMENT_TAG);
@@ -41,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             // Default fragment
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, TrendingFragment.newInstance(), TrendingFragment.TAG).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, TrendingFragment.newInstance(), currentFragmentTag).commit();
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -92,13 +89,6 @@ public class HomeActivity extends AppCompatActivity {
         }
         ft.attach(fragmentToAttach).commit();
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        bind.unbind();
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

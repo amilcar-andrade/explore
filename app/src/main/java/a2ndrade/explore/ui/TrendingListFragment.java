@@ -45,6 +45,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
     private static final String BUNDLE_LANGUAGE_KEY = "BUNDLE_LANGUAGE_KEY";
 
     private static final Set<Class> SET_DIVIDERS;
+
     static {
         Set<Class> set = new HashSet<>(2);
         set.add(ReposAdapter.RepoViewHolder.class);
@@ -52,14 +53,22 @@ public class TrendingListFragment extends AbstractBaseFragment {
         SET_DIVIDERS = set;
     }
 
-    @BindString(R.string.trending_interval_month) String month;
-    @BindString(R.string.trending_interval_today) String today;
-    @BindString(R.string.trending_interval_week) String week;
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.progress_bar) ProgressBar progressBar;
-    @BindView(android.R.id.empty) View empty;
-    @BindView(R.id.trending_empty_icon) ImageView emptyIcon;
-    @BindView(R.id.trending_empty_title) TextView emptyTextView;
+    @BindString(R.string.trending_interval_month)
+    String month;
+    @BindString(R.string.trending_interval_today)
+    String today;
+    @BindString(R.string.trending_interval_week)
+    String week;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(android.R.id.empty)
+    View empty;
+    @BindView(R.id.trending_empty_icon)
+    ImageView emptyIcon;
+    @BindView(R.id.trending_empty_title)
+    TextView emptyTextView;
 
     private int mode;
     private String timeFrame;
@@ -261,7 +270,7 @@ public class TrendingListFragment extends AbstractBaseFragment {
 
         if (isDevelopersMode) {
             developersAdapter.addItems((List<Developer>) data, timeFrame);
-        } else  {
+        } else {
             reposAdapter.addItems((List<Repo>) data, timeFrame);
         }
         recyclerView.setAdapter(isDevelopersMode ? developersAdapter : reposAdapter);

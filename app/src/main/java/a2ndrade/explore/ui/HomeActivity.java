@@ -87,6 +87,7 @@ public class HomeActivity extends AbstractBaseActivity {
                     : IntegrationsFragment.TAG.equals(currentFragmentTag) ? IntegrationsFragment.newInstance() : ShowcasesFragment.newInstance();
             ft.replace(R.id.fragment_container, fragmentToAttach, currentFragmentTag);
         }
+        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         ft.attach(fragmentToAttach).commit();
     }
     @Override

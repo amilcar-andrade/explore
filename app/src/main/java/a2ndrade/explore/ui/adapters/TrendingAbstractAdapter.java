@@ -12,8 +12,6 @@ import java.util.List;
 import a2ndrade.explore.R;
 
 public abstract class TrendingAbstractAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
 
     ArrayList<T> items = new ArrayList<>(25); // Know capacity 25
     String header;
@@ -38,7 +36,8 @@ public abstract class TrendingAbstractAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? TYPE_HEADER : TYPE_ITEM;
+        return position == 0 ? R.layout.trending_header_list_item :
+                TrendingAbstractAdapter.this instanceof ReposAdapter ? R.layout.trending_repo_list_item : R.layout.trending_developer_list_item;
     }
 
     @Override
@@ -49,7 +48,7 @@ public abstract class TrendingAbstractAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_HEADER) {
+        if (viewType == R.layout.trending_header_list_item) {
             return new HeaderViewHolder(inflater.inflate(R.layout.trending_header_list_item, parent, false));
         }
 

@@ -23,11 +23,11 @@
     <dimen name="avatar_padding">4dp</dimen> <!-- (avatar_bounds - avatar_size) / 2 -->
     <dimen name="avatar_margin">12dp</dimen> <!-- padding_normal - avatar_padding -->
 
-    <dimen name="medium_avatar_size">72dp</dimen>
+    <dimen name="medium_avatar_size">75dp</dimen>
 
     <!-- Trending fragment-->
     <dimen name="medium_card_width">150dp</dimen> <!-- Google Assistant uses this width-->
-    <dimen name="medium_card_height">176dp</dimen> <!-- Google Assistant uses this height-->
+    <dimen name="medium_card_height">180dp</dimen> <!-- Google Assistant uses this height-->
     <dimen name="medium_card_title_padding_top">14dp</dimen>
 
     <!-- Z-axis elevations -->

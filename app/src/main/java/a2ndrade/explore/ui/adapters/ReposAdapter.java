@@ -22,7 +22,7 @@ public class ReposAdapter extends TrendingAbstractAdapter<Repo> {
     public ReposAdapter(LayoutInflater inflater) {
         super(inflater);
         final Resources resources = inflater.getContext().getResources();
-        colours = resources.getIntArray(R.array.letter_colors);
+        colours = resources.getIntArray(R.array.rainbow_200);
     }
 
     @Override

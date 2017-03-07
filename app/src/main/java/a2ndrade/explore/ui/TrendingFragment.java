@@ -19,7 +19,6 @@ import a2ndrade.explore.R;
 import butterknife.BindView;
 
 public class TrendingFragment extends AbstractBaseFragment {
-    private static final String BLANK_STRING = "";
     private static final int TAB_COUNT = 2;
     static final int[] TAB_TITLES = {R.string.developers, R.string.repositories};
     static final int[] LANGUAGE_LABELS = {R.string.language_all, R.string.language_c,
@@ -108,13 +107,10 @@ public class TrendingFragment extends AbstractBaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        final AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if (activity != null) {
-            activity.setSupportActionBar(toolbar);
-            activity.getSupportActionBar().setTitle(BLANK_STRING);
-        }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override

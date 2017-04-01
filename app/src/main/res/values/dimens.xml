@@ -9,6 +9,7 @@
     <dimen name="spacing_huge">64dp</dimen>
     <dimen name="divider_height">1px</dimen>
     <dimen name="listPreferredItemSubHeaderHeight">48dp</dimen> <!-- Subheader height 48dp-->
+    <dimen name="bottom_bar_height">56dp</dimen>
 
     <dimen name="keyline_2">72dp</dimen>
     <dimen name="keyline_2_minus_16dp">56dp</dimen>

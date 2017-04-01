@@ -10,25 +10,25 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_gravity="top"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_gravity="top"
+        android:paddingBottom="@dimen/bottom_bar_height"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="@dimen/spacing_micro"
         android:layout_gravity="bottom"
         android:layout_marginBottom="56dp"
-        android:background="@drawable/shadow"
-        android:id="@+id/view"/>
+        android:background="@drawable/bottom_shadow"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
         app:itemBackground="@color/bottom_navigation"
         app:itemIconTint="@drawable/bottom_navigation_item_color_state"
         app:itemTextColor="@drawable/bottom_navigation_item_color_state"
-        app:menu="@menu/activity_home_bottom_navigation" />
+        app:menu="@menu/activity_home_bottom_navigation"/>
 </android.support.design.widget.CoordinatorLayout>

@@ -23,7 +23,7 @@ public class DevelopersTrendingLoader extends TrendingAbstractLoader<List<Develo
     protected List<Developer> loadInBackground0() throws Exception {
         // Good to know: the Context returned by getContext()
         // is the application context
-        Document document = Jsoup.connect(END_POINT + QUERY_PARAM_SINCE + since).get();
+        final Document document = Jsoup.connect(END_POINT + QUERY_PARAM_SINCE + since).get();
         final Elements description = document.select(".user-leaderboard-list-item.leaderboard-list-item");
         final Elements avatars = description.select(".leaderboard-gravatar");
         final Elements repo = description.select(".repo");
@@ -46,6 +46,11 @@ public class DevelopersTrendingLoader extends TrendingAbstractLoader<List<Develo
         }
 
         return data;
+    }
+
+    @Override
+    protected void onReset() {
+        super.onReset();
     }
 
     private String extractName(String loginAndName) {

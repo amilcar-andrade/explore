@@ -86,7 +86,7 @@ public class IntegrationsFragment extends AbstractBaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loaderManager.initLoader(LOADER_INTEGRATION_ID, null, integrationLoader);
+        getLoaderManager().initLoader(LOADER_INTEGRATION_ID, null, integrationLoader);
     }
 
     @Override

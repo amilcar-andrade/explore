@@ -15,7 +15,6 @@
     <color name="bottom_navigation">#212121</color>
     <color name="light_grey">#fff5f5f5</color>
 
-    <color name="red_200">#f44336</color>
     <color name="pink_200">#F48FB1</color>
     <color name="purple_200">#CE93D8</color>
     <color name="deep_purple_200">#B39DDB</color>
@@ -33,7 +32,6 @@
     <color name="deep_orange_200">#FFAB91</color>
 
     <array name="rainbow_200">
-        <item>@color/red_200</item>
         <item>@color/pink_200</item>
         <item>@color/purple_200</item>
         <item>@color/deep_purple_200</item>

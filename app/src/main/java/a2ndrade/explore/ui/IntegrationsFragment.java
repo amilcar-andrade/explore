@@ -1,5 +1,6 @@
 package a2ndrade.explore.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import a2ndrade.explore.R;
@@ -87,22 +89,15 @@ public class IntegrationsFragment extends AbstractBaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(LOADER_INTEGRATION_ID, null, integrationLoader);
+        adapter = new IntegrationCategoryAdapter(getActivity());
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(toolbarTitle);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         integrationLoader = null;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        final AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if (activity != null) {
-            activity.setSupportActionBar(toolbar);
-            activity.getSupportActionBar().setTitle(toolbarTitle);
-        }
     }
 
     @Override
@@ -113,11 +108,15 @@ public class IntegrationsFragment extends AbstractBaseFragment {
     /*package*/ static class IntegrationCategoryAdapter extends RecyclerView.Adapter<IntegrationCategoryAdapter.IntegrationCategoryHolder> {
 
         private final LayoutInflater inflater;
-        private final List<IntegrationCategory> items;
+        private List<IntegrationCategory> items;
 
-        /*package*/ IntegrationCategoryAdapter(List<IntegrationCategory> items, LayoutInflater inflater) {
-            this.inflater = inflater;
-            this.items = items;
+        /*package*/ IntegrationCategoryAdapter(Context context) {
+            this.inflater = LayoutInflater.from(context);
+            this.items = new ArrayList<>();
+        }
+
+        public void addItems(List<IntegrationCategory> categories) {
+            this.items.addAll(categories);
         }
 
         @Override
@@ -205,7 +204,7 @@ public class IntegrationsFragment extends AbstractBaseFragment {
             }
             IntegrationsFragment.this.data = data;
             progressBar.setVisibility(View.GONE);
-            adapter = new IntegrationCategoryAdapter(data, getActivity().getLayoutInflater());
+            adapter.addItems(data);
             recyclerView.setAdapter(adapter);
             recyclerView.setVisibility(View.VISIBLE);
         }

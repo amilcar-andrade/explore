@@ -75,7 +75,7 @@ public class HomeActivity extends AbstractBaseActivity {
         // Get the previous fragment one and detach it instead of removing it
         final Fragment fragmentToDetach = manager.findFragmentByTag(currentFragmentTag);
         if (fragmentToDetach != null) {
-            // The detach method removes the fragment from the UI, but its state is maintained by the Fragment Manager
+            // The detach method detaches the fragment from the UI, but its state is maintained by the Fragment Manager
             ft.detach(fragmentToDetach);
         }
 

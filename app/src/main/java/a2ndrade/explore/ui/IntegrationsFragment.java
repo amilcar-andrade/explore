@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -67,7 +66,7 @@ public class IntegrationsFragment extends AbstractBaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.integration_fragment, menu);
+        toolbar.inflateMenu(R.menu.integration_fragment);
     }
 
     @Override
@@ -90,8 +89,6 @@ public class IntegrationsFragment extends AbstractBaseFragment {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(LOADER_INTEGRATION_ID, null, integrationLoader);
         adapter = new IntegrationCategoryAdapter(getActivity());
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(toolbarTitle);
     }
 
     @Override

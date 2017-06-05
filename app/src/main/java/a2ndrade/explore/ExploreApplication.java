@@ -2,18 +2,20 @@ package a2ndrade.explore;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
+import a2ndrade.explore.injection.component.ApplicationComponent;
+import a2ndrade.explore.injection.component.DaggerApplicationComponent;
+import a2ndrade.explore.injection.module.ApplicationModule;
 
 public class ExploreApplication extends Application {
+    ApplicationComponent applicationComponent;
 
     @Override public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
-        // Normal app init code...
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
+        applicationComponent.inject(this);
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        return applicationComponent;
     }
 }

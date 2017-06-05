@@ -8,7 +8,7 @@ import retrofit.RestAdapter;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-public interface GitHubService {
+public interface GitHubApi {
 
     String BASE_END_POINT = "https://api.github.com";
 
@@ -23,11 +23,11 @@ public interface GitHubService {
 
     class Factory {
 
-        public static GitHubService getGitHubService() {
+        public static GitHubApi getGitHubApi() {
             return new RestAdapter.Builder()
-                    .setEndpoint(GitHubService.BASE_END_POINT)
+                    .setEndpoint(GitHubApi.BASE_END_POINT)
                     .build()
-                    .create(GitHubService.class);
+                    .create(GitHubApi.class);
         }
     }
 }

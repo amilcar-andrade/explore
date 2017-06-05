@@ -4,22 +4,23 @@ import android.content.Context;
 
 import java.util.List;
 
-import a2ndrade.explore.data.api.GitHubService;
+import javax.inject.Inject;
+
+import a2ndrade.explore.ExploreApplication;
+import a2ndrade.explore.data.api.IntegrationApi;
 import a2ndrade.explore.data.model.IntegrationCategory;
-import retrofit.RestAdapter;
 
 public class IntegrationLoader extends AbstractAsyncTaskLoader<List<IntegrationCategory>> {
+    @Inject
+    IntegrationApi service;
 
     public IntegrationLoader(Context context) {
         super(context);
+        ((ExploreApplication)context.getApplicationContext()).getApplicationComponent().inject(this);
     }
 
     @Override
     protected List<IntegrationCategory> loadInBackground0() throws Exception {
-        GitHubService service = new RestAdapter.Builder()
-                .setEndpoint(GitHubService.INTEGRATION_END_POINT)
-                .build()
-                .create(GitHubService.class);
         return service.getIntegrations();
     }
 }

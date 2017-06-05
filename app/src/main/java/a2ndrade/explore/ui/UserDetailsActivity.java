@@ -7,12 +7,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import a2ndrade.explore.R;
-import a2ndrade.explore.data.api.GitHubService;
 import a2ndrade.explore.data.model.User;
 import a2ndrade.explore.util.glide.CircleTransform;
 import butterknife.BindView;
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -77,11 +75,7 @@ public class UserDetailsActivity extends AbstractBaseActivity {
     }
 
     private void loaderUser(String username) {
-        GitHubService gitHubApi = new RestAdapter.Builder()
-                .setEndpoint(GitHubService.BASE_END_POINT)
-                .build()
-                .create(GitHubService.class);
-        gitHubApi.getUser(username, new Callback<User>() {
+        service.getUser(username, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 UserDetailsActivity.this.user = user;
